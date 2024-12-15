@@ -1,8 +1,18 @@
-def process_item(self, item, spider):
-    # Process the scraped item (e.g., clean, validate, store)
-    # For example, you could save the item to a database or a file
-    return item
+class CleanDataPipeline:
+    def process_item(self, item, spider):
+        # Clean and validate the scraped data
+        item['title'] = item['title'].strip() if item['title'] else 'No Title'
+        item['content'] = ' '.join(item['content']).strip() if item['content'] else 'No Content'
+        return item
 
-def close_spider(self, spider):
-    # Code to execute when the spider is closed
-    pass
+class SaveToFilePipeline:
+    def open_spider(self, spider):
+        self.file = open('scraped_data.json', 'w')
+
+    def close_spider(self, spider):
+        self.file.close()
+
+    def process_item(self, item, spider):
+        line = f"{item}\n"
+        self.file.write(line)
+        return item

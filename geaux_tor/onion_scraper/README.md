@@ -1,5 +1,3 @@
-# README.md
-
 # Onion Scraper Project
 
 This project is a Scrapy-based web scraper designed to extract data from .onion websites. It utilizes the Tor network to access hidden services and scrape content.
